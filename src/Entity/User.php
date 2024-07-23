@@ -31,6 +31,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
+    #[ORM\Column(length: 55, nullable: true)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 35, nullable: true)]
+    private ?string $prenom = null;
+
+    #[ORM\OneToOne(mappedBy: 'Utilisateur', cascade: ['persist', 'remove'])]
+    private ?Medecin $medecin = null;
+
+    #[ORM\OneToOne(mappedBy: 'Utilisateur', cascade: ['persist', 'remove'])]
+    private ?Patient $patient = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,5 +116,68 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(?string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(?string $prenom): static
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getMedecin(): ?Medecin
+    {
+        return $this->medecin;
+    }
+
+    public function setMedecin(?Medecin $medecin): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($medecin === null && $this->medecin !== null) {
+            $this->medecin->setUtilisateur(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($medecin !== null && $medecin->getUtilisateur() !== $this) {
+            $medecin->setUtilisateur($this);
+        }
+
+        $this->medecin = $medecin;
+
+        return $this;
+    }
+
+    public function getPatient(): ?Patient
+    {
+        return $this->patient;
+    }
+
+    public function setPatient(Patient $patient): static
+    {
+        // set the owning side of the relation if necessary
+        if ($patient->getUtilisateur() !== $this) {
+            $patient->setUtilisateur($this);
+        }
+
+        $this->patient = $patient;
+
+        return $this;
     }
 }
