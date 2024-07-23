@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\MedecinRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MedecinRepository::class)]
@@ -21,6 +23,27 @@ class Medecin
 
     #[ORM\OneToOne(inversedBy: 'medecin', cascade: ['persist', 'remove'])]
     private ?User $Utilisateur = null;
+
+    /**
+     * @var Collection<int, Avis>
+     */
+    #[ORM\OneToMany(targetEntity: Avis::class, mappedBy: 'Medecin')]
+    private Collection $avis;
+
+    /**
+     * @var Collection<int, Visite>
+     */
+    #[ORM\OneToMany(targetEntity: Visite::class, mappedBy: 'Medecin')]
+    private Collection $visites;
+
+    // public function __toString():string{
+    //     return $this->getUtilisateur()?$this->getUtilisateur()->getNom().' '.$this->getUtilisateur()->getPrenom().' '.$this->getSpecialty():$this->getSpecialty();
+    // }
+    public function __construct()
+    {
+        $this->avis = new ArrayCollection();
+        $this->visites = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,6 +82,66 @@ class Medecin
     public function setUtilisateur(?User $Utilisateur): static
     {
         $this->Utilisateur = $Utilisateur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Avis>
+     */
+    public function getAvis(): Collection
+    {
+        return $this->avis;
+    }
+
+    public function addAvi(Avis $avi): static
+    {
+        if (!$this->avis->contains($avi)) {
+            $this->avis->add($avi);
+            $avi->setMedecin($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAvi(Avis $avi): static
+    {
+        if ($this->avis->removeElement($avi)) {
+            // set the owning side to null (unless already changed)
+            if ($avi->getMedecin() === $this) {
+                $avi->setMedecin(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Visite>
+     */
+    public function getVisites(): Collection
+    {
+        return $this->visites;
+    }
+
+    public function addVisite(Visite $visite): static
+    {
+        if (!$this->visites->contains($visite)) {
+            $this->visites->add($visite);
+            $visite->setMedecin($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVisite(Visite $visite): static
+    {
+        if ($this->visites->removeElement($visite)) {
+            // set the owning side to null (unless already changed)
+            if ($visite->getMedecin() === $this) {
+                $visite->setMedecin(null);
+            }
+        }
 
         return $this;
     }

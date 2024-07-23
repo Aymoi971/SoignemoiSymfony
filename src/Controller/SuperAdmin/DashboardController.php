@@ -2,18 +2,26 @@
 
 namespace App\Controller\SuperAdmin;
 
-use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
-use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use App\Entity\User;
+use App\Entity\Medecin;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Controller\SuperAdmin\MedecinCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
 {
     #[Route('/superadmin', name: 'admin')]
     public function index(): Response
     {
-        return parent::index();
+        // return parent::index();
+        $routeBuilder = $this->container->get(AdminUrlGenerator::class);
+        $url = $routeBuilder->setController(MedecinCrudController::class)->generateUrl();
+        return $this->redirect($url);
+
 
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
@@ -40,7 +48,9 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
+        yield MenuItem::linkToCrud('Users', 'fas fa-map-marker-alt', User::class);
+        yield MenuItem::linkToCrud('Medecins', 'fas fa-map-marker-alt', Medecin::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

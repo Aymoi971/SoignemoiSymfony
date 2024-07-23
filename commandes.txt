@@ -55,6 +55,7 @@ symfony console make:form FromName ClassName
 symfony composer req "easycorp/easyadmin-bundle:4.x-dev"
 symfony console make:admin:dashboard
 symfony console make:admin:crud
+use symfony console list make to see list of all make commands
 
 symfony console make:controller ControllerName
 
@@ -64,5 +65,6 @@ pour faire une realtion entre les tables
 
 symfony serve -d
 ./vendor/bin/phpunit tests/SampleTest.php
+
 
 composer install --no-dev --no-interaction --no-progress --optimize-autoloader --apcu-autoloader
