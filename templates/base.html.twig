@@ -5,13 +5,40 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
+            <!-- Google Font -->
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
+            rel="stylesheet">
+
+            <!-- Css Styles -->
+            <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/font-awesome.min.css') }}" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/flaticon.css') }}" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/nice-select.css') }}" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/jquery-ui.min.css') }}" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/magnific-popup.css') }}" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/slicknav.min.css') }}" type="text/css">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}" type="text/css">
         {% endblock %}
 
         {% block javascripts %}
+            <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
+            <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
+            <script src="{{ asset('js/masonry.pkgd.min.js') }}"></script>
+            <script src="{{ asset('js/jquery-ui.min.js') }}"></script>
+            <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
+            <script src="{{ asset('js/jquery.slicknav.js') }}"></script>
+            <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+            <script src="{{ asset('js/main.js') }}"></script>
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
     <body>
+        {{ include('include/_preloader.html.twig') }}
+        {{ include('include/_OffcanvasMenu.html.twig') }}
+        {{ include('include/_HeaderSection.html.twig') }}
         {% block body %}{% endblock %}
+        {{ include('include/_footer.html.twig') }}
     </body>
 </html>

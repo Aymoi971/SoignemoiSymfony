@@ -20,11 +20,11 @@ final class Version20240723003404 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP SEQUENCE medecin_id_seq CASCADE');
-        $this->addSql('ALTER TABLE medecin DROP CONSTRAINT fk_1bda53c6fb88e14f');
-        $this->addSql('DROP TABLE medecin');
-        $this->addSql('ALTER TABLE "user" DROP nom');
-        $this->addSql('ALTER TABLE "user" DROP prenom');
+        // $this->addSql('DROP SEQUENCE medecin_id_seq CASCADE');
+        // $this->addSql('ALTER TABLE medecin DROP CONSTRAINT fk_1bda53c6fb88e14f');
+        // $this->addSql('DROP TABLE medecin');
+        // $this->addSql('ALTER TABLE "user" DROP nom');
+        // $this->addSql('ALTER TABLE "user" DROP prenom');
     }
 
     public function down(Schema $schema): void

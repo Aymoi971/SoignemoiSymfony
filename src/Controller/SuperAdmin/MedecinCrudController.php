@@ -25,8 +25,8 @@ class MedecinCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud{
         $crud->setEntityLabelInSingular('Medecin');
         $crud->setEntityLabelInPlural('Medecins');
-        $crud->setSearchFields(['Matricule', 'Utilisateur','Specialty']);
-        $crud->setDefaultSort(['Specialty' => 'ASC']);
+        $crud->setSearchFields(['Matricule', 'Utilisateur','specialty']);
+        $crud->setDefaultSort(['specialty' => 'ASC']);
         return $crud;
     }
     public function configureFilters(Filters $filters): Filters
@@ -40,7 +40,7 @@ class MedecinCrudController extends AbstractCrudController
     {
         yield TextField::new('Matricule');
         yield AssociationField::new('Utilisateur');
-        yield TextField::new('Specialty');
+        yield AssociationField::new('specialty');
         
         // return [
         //     IdField::new('id'),

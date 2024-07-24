@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+{% block title %}Votre Acceuil{% endblock %}
+
+{% block body %}
+<section class="services-page spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 order-lg-2">
+                    <div class="services__details">
+                        <div class="services__title">
+                            <h4><img src="img/icons/services-icon.png" alt=""> All services</h4>
+                        </div>
+                        {% block Details %}{% endblock %}               
+                    </div>
+                </div>
+                <div class="col-lg-4 order-lg-1">
+                    <div class="services__sidebar">    
+                        {% block SideBar %}
+                        {% endblock %}               
+                    </div>
+                    <div class="services__appoinment">    
+                        {% block Formulaire %}{% endblock %}               
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% for categoryName, category in categories %}
+    <div class="services__accordion">    
+        <div class="services__title">
+            <h4><img src="img/icons/services-icon.png" alt=""> {{categoryName}} </h4>
+        </div>
+        <div class="accordion" id="accordion{{categoryName}}">
+            {% import "macro/accordeonCard.html.twig" as accordeon %}
+            {% for key, subcategory in category %}
+                {{accordeon.card(categoryName,key,subcategory)}}
+            {% endfor %}
+        </div>
+    </div>
+{% endfor %}

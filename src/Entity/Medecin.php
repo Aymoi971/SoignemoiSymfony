@@ -18,8 +18,6 @@ class Medecin
     #[ORM\Column(length: 35)]
     private ?string $Matricule = null;
 
-    #[ORM\Column(length: 55)]
-    private ?string $Specialty = null;
 
     #[ORM\OneToOne(inversedBy: 'medecin', cascade: ['persist', 'remove'])]
     private ?User $Utilisateur = null;
@@ -35,6 +33,10 @@ class Medecin
      */
     #[ORM\OneToMany(targetEntity: Visite::class, mappedBy: 'Medecin')]
     private Collection $visites;
+
+    #[ORM\ManyToOne(inversedBy: 'medecins')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Specialty $specialty = null;
 
     // public function __toString():string{
     //     return $this->getUtilisateur()?$this->getUtilisateur()->getNom().' '.$this->getUtilisateur()->getPrenom().' '.$this->getSpecialty():$this->getSpecialty();
@@ -62,18 +64,7 @@ class Medecin
         return $this;
     }
 
-    public function getSpecialty(): ?string
-    {
-        return $this->Specialty;
-    }
-
-    public function setSpecialty(string $Specialty): static
-    {
-        $this->Specialty = $Specialty;
-
-        return $this;
-    }
-
+    
     public function getUtilisateur(): ?User
     {
         return $this->Utilisateur;
@@ -142,6 +133,18 @@ class Medecin
                 $visite->setMedecin(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSpecialty(): ?Specialty
+    {
+        return $this->specialty;
+    }
+
+    public function setSpecialty(?Specialty $specialty): static
+    {
+        $this->specialty = $specialty;
 
         return $this;
     }

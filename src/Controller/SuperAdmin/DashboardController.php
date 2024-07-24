@@ -7,6 +7,7 @@ use App\Entity\Medecin;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Controller\SuperAdmin\MedecinCrudController;
+use App\Entity\Specialty;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
@@ -51,6 +52,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoRoute('Back to the website', 'fas fa-home', 'homepage');
         yield MenuItem::linkToCrud('Users', 'fas fa-map-marker-alt', User::class);
         yield MenuItem::linkToCrud('Medecins', 'fas fa-map-marker-alt', Medecin::class);
+        yield MenuItem::linkToCrud('Specialites', 'fas fa-map-marker-alt', Specialty::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

@@ -31,8 +31,10 @@ class Sejour
     #[ORM\Column(length: 255)]
     private ?string $motif = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $Specialty = null;
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Specialty $Specialty = null;
+
 
     public function getId(): ?int
     {
@@ -99,15 +101,17 @@ class Sejour
         return $this;
     }
 
-    public function getSpecialty(): ?string
+    public function getSpecialty(): ?Specialty
     {
         return $this->Specialty;
     }
 
-    public function setSpecialty(string $Specialty): static
+    public function setSpecialty(?Specialty $Specialty): static
     {
         $this->Specialty = $Specialty;
 
         return $this;
     }
+
+
 }
